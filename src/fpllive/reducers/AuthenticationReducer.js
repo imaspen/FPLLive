@@ -1,4 +1,4 @@
-import {REQUEST_AUTHENTICATE, RECEIVE_AUTHENTICATE} from '../actions/AuthenticateActions';
+import {REQUEST_AUTHENTICATE, RECEIVE_AUTHENTICATE, ALREADY_AUTHENTICATED} from '../actions/AuthenticateActions';
 
 export default (state = {
     isFetching: false,
@@ -14,6 +14,11 @@ export default (state = {
             return {
                 ...state,
                 isFetching: false,
+                isAuthenticated: true,
+            };
+        case ALREADY_AUTHENTICATED:
+            return {
+                ...state,
                 isAuthenticated: true,
             };
         default:

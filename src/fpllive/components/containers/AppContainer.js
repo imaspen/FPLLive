@@ -11,7 +11,7 @@ import LeagueStack from '../../stacks/LeagueStack';
 import MyTeamStack from '../../stacks/MyTeamStack';
 import CompareTeamStack from '../../stacks/CompareTeamStack';
 import LoginScreen from '../presentational/LoginPage';
-import {authenticate} from '../../actions/AuthenticateActions';
+import {alreadyAuthenticated, authenticate, testAuthenticated} from '../../actions/AuthenticateActions';
 
 class AppContainer extends Component {
     AppNavigator = createMaterialBottomTabNavigator({
@@ -55,6 +55,11 @@ class AppContainer extends Component {
 
     componentDidMount() {
         this.props.dispatch(fetchBootstrap());
+        testAuthenticated().then(isAuthenticated => {
+            if (isAuthenticated) {
+                this.props.dispatch(alreadyAuthenticated());
+            }
+        });
     }
 
     render() {

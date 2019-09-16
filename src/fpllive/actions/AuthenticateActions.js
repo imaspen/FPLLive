@@ -1,5 +1,16 @@
 const ACTION_HEADER = 'AUTHENTICATE_';
 
+export function testAuthenticated() {
+    return fetch('https://fantasy.premierleague.com/api/me/', {
+        headers: new Headers({'User-Agent': 'FPL Live App'}),
+        credentials: 'include',
+    }).then(
+        response => response.json()
+    ).then(
+        json => json.player !== null
+    );
+}
+
 export const REQUEST_AUTHENTICATE = ACTION_HEADER + 'REQUEST_AUTHENTICATE';
 
 function requestAuthentication() {
@@ -15,6 +26,15 @@ function receiveAuthentication() {
     console.log('Authentication Received');
     return {
         type: RECEIVE_AUTHENTICATE,
+    };
+}
+
+export const ALREADY_AUTHENTICATED = ACTION_HEADER + 'ALREADY_AUTHENTICATED';
+
+export function alreadyAuthenticated() {
+    console.log('Authentication Confirmed');
+    return {
+        type: ALREADY_AUTHENTICATED,
     };
 }
 
