@@ -22,8 +22,9 @@ class PlayerScreen extends Component {
     static router = Navigator.router;
 
     static navigationOptions = ({navigation}) => {
+        const player = navigation.getParam('player');
         return {
-            header: <CustomHeader title={navigation.getParam('player').getFullName()} navigation={navigation}
+            header: <CustomHeader title={player.getFullName()} subtitle={player.team.name} navigation={navigation}
                                   elevation={0}/>,
         };
     };
