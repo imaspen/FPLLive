@@ -11,7 +11,8 @@ import LeagueStack from '../../stacks/LeagueStack';
 import MyTeamStack from '../../stacks/MyTeamStack';
 import CompareTeamStack from '../../stacks/CompareTeamStack';
 import LoginScreen from '../presentational/LoginPage';
-import {alreadyAuthenticated, authenticate, testAuthenticated} from '../../actions/AuthenticateActions';
+import {authenticate} from '../../actions/AuthenticateActions';
+import {fetchAccount} from '../../actions/AccountActions';
 
 class AppContainer extends Component {
     AppNavigator = createMaterialBottomTabNavigator({
@@ -32,9 +33,7 @@ class AppContainer extends Component {
         const {AuthenticationReducer, BootstrapReducer} = state;
         return {
             ready: !BootstrapReducer.isFetching
-                && BootstrapReducer.players.length > 0
-                && !AuthenticationReducer.isFetching
-                && AuthenticationReducer.isAuthenticated,
+                && BootstrapReducer.players.length > 0,
             authenticated: AuthenticationReducer.isAuthenticated,
             ...ownProps,
         };
@@ -55,11 +54,7 @@ class AppContainer extends Component {
 
     componentDidMount() {
         this.props.dispatch(fetchBootstrap());
-        testAuthenticated().then(isAuthenticated => {
-            if (isAuthenticated) {
-                this.props.dispatch(alreadyAuthenticated());
-            }
-        });
+        this.props.dispatch(fetchAccount());
     }
 
     render() {

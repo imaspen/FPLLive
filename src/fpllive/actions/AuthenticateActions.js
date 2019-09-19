@@ -1,15 +1,6 @@
-const ACTION_HEADER = 'AUTHENTICATE_';
+import {fetchAccount} from './AccountActions';
 
-export function testAuthenticated() {
-    return fetch('https://fantasy.premierleague.com/api/me/', {
-        headers: new Headers({'User-Agent': 'FPL Live App'}),
-        credentials: 'include',
-    }).then(
-        response => response.json()
-    ).then(
-        json => json.player !== null
-    );
-}
+const ACTION_HEADER = 'AUTHENTICATE_';
 
 export const REQUEST_AUTHENTICATE = ACTION_HEADER + 'REQUEST_AUTHENTICATE';
 
@@ -17,15 +8,6 @@ function requestAuthentication() {
     console.log('Requesting Authentication');
     return {
         type: REQUEST_AUTHENTICATE,
-    };
-}
-
-export const RECEIVE_AUTHENTICATE = ACTION_HEADER + 'RECEIVE_AUTHENTICATE';
-
-function receiveAuthentication() {
-    console.log('Authentication Received');
-    return {
-        type: RECEIVE_AUTHENTICATE,
     };
 }
 
@@ -60,7 +42,7 @@ export function authenticate(email, password) {
         }).then(
             response => {
                 if (response.ok) {
-                    dispatch(receiveAuthentication());
+                    dispatch(fetchAccount());
                 }
             }
         );
