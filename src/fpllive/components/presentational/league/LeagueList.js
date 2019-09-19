@@ -1,11 +1,14 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {ListItem, Avatar} from 'react-native-elements';
-import LeagueFilter from './LeagueFilter';
+import {Avatar, ListItem} from 'react-native-elements';
+import ChipFilter from '../ChipFilter';
 
 export default props => (
     <FlatList
-        ListHeaderComponent={<LeagueFilter selected={0} selectMode={props.selectMode} selectedMode={props.selectedMode}/>}
+        ListHeaderComponent={
+            <ChipFilter options={['Total', 'This Week']} selected={0} selectMode={props.selectMode}
+                        selectedMode={props.selectedMode}/>
+        }
         stickyHeaderIndices={[0]}
         data={props.entries}
         keyExtractor={item => item.id.toString()}

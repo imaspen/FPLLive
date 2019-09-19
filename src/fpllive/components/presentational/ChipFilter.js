@@ -5,7 +5,7 @@ import {StyleSheet} from 'react-native';
 
 export default props =>  (
     <View style={stylesheet.view}>
-        {['Total', 'This Week'].map((value, index) =>
+        {props.options.map((value, index) =>
             <Chip
                 mode="outlined"
                 key={index}
