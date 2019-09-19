@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import React from 'react';
 
 import CompareTeamScreen from '../components/containers/team/CompareTeamScreen';
-import PlayerScreen from '../components/containers/team/PlayerScreen';
+import PlayerScreen from '../components/containers/player/PlayerScreen';
 
 export default {
     screen: createStackNavigator({

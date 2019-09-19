@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PlayerHistory from '../../presentational/team/player/PlayerHistory';
+import PlayerHistory from '../../presentational/player/PlayerHistory';
 import {connect} from 'react-redux';
 
 class PlayerHistoryScreen extends Component {

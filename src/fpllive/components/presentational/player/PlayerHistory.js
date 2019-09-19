@@ -2,7 +2,7 @@ import React from 'react';
 import {View, FlatList} from 'react-native';
 import {Avatar, DataTable, Divider, List} from 'react-native-paper';
 
-import Player from '../../../../models/Player';
+import Player from '../../../models/Player';
 
 
 export default props => {

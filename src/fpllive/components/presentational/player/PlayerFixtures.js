@@ -1,6 +1,6 @@
 import React from 'react';
 import {DataTable, Text} from 'react-native-paper';
-import {FlatList, RefreshControl, View, StyleSheet} from 'react-native';
+import {FlatList, View, StyleSheet} from 'react-native';
 
 export default props => {
     const renderItem = ({item: fixture}) => (

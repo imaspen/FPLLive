@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import PlayerFixtures from '../../presentational/team/player/PlayerFixtures';
+import PlayerFixtures from '../../presentational/player/PlayerFixtures';
 
 class PlayerFixturesScreen extends Component {
     static mapStateToProps(state, ownProps) {

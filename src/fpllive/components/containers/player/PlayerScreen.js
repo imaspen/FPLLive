@@ -5,8 +5,8 @@ import {View} from 'react-native';
 import {createMaterialTopTabNavigator} from 'react-navigation';
 
 import CustomHeader from '../../CustomHeader';
-import PlayerPhoto from '../../presentational/team/player/PlayerPhoto';
-import PlayerTabBar from '../../presentational/team/player/PlayerTabBar';
+import PlayerPhoto from '../../presentational/player/PlayerPhoto';
+import PlayerTabBar from '../../presentational/player/PlayerTabBar';
 import {fetchPlayer} from '../../../actions/PlayerActions';
 import PlayerFixturesScreen from './PlayerFixturesScreen';
 import PlayerHistoryScreen from './PlayerHistoryScreen';
