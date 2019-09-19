@@ -33,7 +33,7 @@ class AppContainer extends Component {
         const {AuthenticationReducer, BootstrapReducer} = state;
         return {
             ready: !BootstrapReducer.isFetching
-                && BootstrapReducer.players.length > 0,
+                && BootstrapReducer.bootstrap,
             authenticated: AuthenticationReducer.isAuthenticated,
             ...ownProps,
         };

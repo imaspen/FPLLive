@@ -39,7 +39,7 @@ class LeagueScreen extends Component {
                 <LeagueList
                     selectTeam={this.selectTeam.bind(this)}
                     selectedMode={this.state.pointsToShow}
-                    selectMode={index => this.setState({pointsToShow: index})}
+                    selectMode={index => () => this.setState({pointsToShow: index})}
                     mode={this.state.pointsToShow}
                     entries={this.props.league.entries}
                     refreshing={this.props.refreshing}

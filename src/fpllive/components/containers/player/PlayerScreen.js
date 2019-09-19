@@ -33,7 +33,7 @@ class PlayerScreen extends Component {
         const player = ownProps.navigation.getParam('player');
         return {
             ...ownProps,
-            teams: state.BootstrapReducer.teams,
+            teams: state.BootstrapReducer.bootstrap.teams,
             fetching: state.PlayerReducer.isFetching,
             player: player,
             playerDetails: state.PlayerReducer.players[player.id],

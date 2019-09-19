@@ -4,6 +4,7 @@ import {ListItem} from 'react-native-elements';
 import {Divider, List, withTheme} from 'react-native-paper';
 import CaptainBadge from './CaptainBadge';
 import Theme from '../../../Theme';
+import ChipFilter from '../ChipFilter';
 
 export default props => {
     const Chevron = withTheme(({theme}) => (

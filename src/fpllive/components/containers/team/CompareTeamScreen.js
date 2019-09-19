@@ -19,7 +19,7 @@ class CompareTeamScreen extends Component {
     };
 
     static mapStateToProps(state, ownProps) {
-        const {teams, players} = state.BootstrapReducer;
+        const {teams, players} = state.BootstrapReducer.bootstrap;
         const {picks, isFetching} = state.CompareTeamReducer;
         const teamId = ownProps.navigation.getParam('team');
         const team = teamId && picks[teamId] ? picks[teamId] : [];

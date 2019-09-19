@@ -6,8 +6,8 @@ import ChipFilter from '../ChipFilter';
 export default props => (
     <FlatList
         ListHeaderComponent={
-            <ChipFilter options={['Total', 'This Week']} selected={0} selectMode={props.selectMode}
-                        selectedMode={props.selectedMode}/>
+            <ChipFilter options={['Total', 'This Week']} select={props.selectMode}
+                        selected={props.selectedMode}/>
         }
         stickyHeaderIndices={[0]}
         data={props.entries}

@@ -1,32 +1,39 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Text, View, FlatList} from 'react-native';
 import {Chip} from 'react-native-paper';
 import {StyleSheet} from 'react-native';
 
 export default props =>  (
-    <View style={stylesheet.view}>
-        {props.options.map((value, index) =>
+    <FlatList
+        style={stylesheet.view}
+        data={props.options}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal
+        renderItem={({item, index}) => (
             <Chip
                 mode="outlined"
-                key={index}
                 style={stylesheet.chip}
-                selected={props.selectedMode === index}
-                onPress={() => props.selectMode(index)}
+                selected={props.selected === index}
+                onPress={props.select(index)}
             >
-                {value}
+                {item}
             </Chip>
         )}
-    </View>
+        ItemSeparatorComponent={() => <View style={stylesheet.separator}/>}
+        ListHeaderComponent={() => <View style={stylesheet.separator}/>}
+        ListFooterComponent={() => <View style={stylesheet.separator}/>}
+    />
 );
 
 const stylesheet = StyleSheet.create({
     view: {
-        padding: 8,
-        flexDirection: 'row',
         backgroundColor: 'white',
         elevation: 8,
+        flexGrow: 0,
+        paddingTop: 8,
+        paddingBottom: 8,
     },
-    chip: {
-        marginRight: 8,
+    separator: {
+        marginLeft: 8,
     },
 });
