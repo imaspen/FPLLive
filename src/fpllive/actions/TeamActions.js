@@ -1,16 +1,16 @@
-const ACTION_HEADER = 'COMPARE_TEAM_';
+const ACTION_HEADER = 'TEAM_';
 
 export const REQUEST = ACTION_HEADER + 'REQUEST';
-function requestCompareTeam() {
-    console.log('Requesting Compare Team');
+function requestTeam() {
+    console.log('Requesting Team');
     return {
         type: REQUEST,
     };
 }
 
 export const RECEIVE = ACTION_HEADER + 'RECEIVE';
-function receiveCompareTeam(json, teamId) {
-    console.log('Compare Team Received');
+function receiveTeam(json, teamId) {
+    console.log('Team Received');
     return {
         type: RECEIVE,
         payload: {
@@ -20,9 +20,9 @@ function receiveCompareTeam(json, teamId) {
     };
 }
 
-export function fetchCompareTeam(teamId, week) {
+export function fetchTeam(teamId, week) {
     return function(dispatch) {
-        dispatch(requestCompareTeam());
+        dispatch(requestTeam());
 
         return fetch(`https://fantasy.premierleague.com/api/entry/${teamId}/event/${week}/picks/`, {
             headers: new Headers({'User-Agent': 'FPL Live App'}),
@@ -36,7 +36,7 @@ export function fetchCompareTeam(teamId, week) {
             }
         ).then(
             json => {
-                dispatch(receiveCompareTeam(json, teamId));
+                dispatch(receiveTeam(json, teamId));
             }
         );
     };

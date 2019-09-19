@@ -1,4 +1,4 @@
-import {RECEIVE, REQUEST} from '../actions/CompareTeamActions';
+import {RECEIVE, REQUEST} from '../actions/TeamActions';
 
 export default (state = {
     isFetching: false,

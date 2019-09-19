@@ -5,7 +5,7 @@ import BootstrapReducer from './BootstrapReducer';
 import LeagueReducer from './LeagueReducer';
 import MyTeamReducer from './MyTeamReducer';
 import PlayerReducer from './PlayerReducer';
-import CompareTeamReducer from './CompareTeamReducer';
+import CompareTeamReducer from './TeamReducer';
 
 export default combineReducers({
     AuthenticationReducer,

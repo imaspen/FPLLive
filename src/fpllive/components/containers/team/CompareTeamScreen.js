@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import CustomHeader from '../../CustomHeader';
 import TeamList from '../../presentational/team/TeamList';
 import FantasyTeam from '../../../models/FantasyTeam';
-import {fetchCompareTeam} from '../../../actions/CompareTeamActions';
+import {fetchTeam} from '../../../actions/TeamActions';
 import {fetchMyTeam} from '../../../actions/MyTeamActions';
 
 class CompareTeamScreen extends Component {
@@ -38,7 +38,7 @@ class CompareTeamScreen extends Component {
     getTeamId = () => this.props.navigation.getParam('team');
 
     refreshCompareTeam() {
-        this.props.dispatch(fetchCompareTeam(this.getTeamId(), 4));
+        this.props.dispatch(fetchTeam(this.getTeamId(), 4));
     }
 
     refreshMyTeam() {
@@ -53,7 +53,7 @@ class CompareTeamScreen extends Component {
     componentDidMount() {
         this.props.navigation.addListener(
             'didFocus',
-            payload => {
+            () => {
                 if (this.getTeamId() && this.props.team === FantasyTeam.EmptyTeam && !this.props.isFetching) {
                     this.refreshCompareTeam();
                 }
