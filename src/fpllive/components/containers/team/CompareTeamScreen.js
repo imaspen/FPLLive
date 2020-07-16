@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 
 import CustomHeader from '../../CustomHeader';
@@ -19,7 +19,7 @@ class CompareTeamScreen extends Component {
     };
 
     static mapStateToProps(state, ownProps) {
-        const {teams, players} = state.BootstrapReducer.bootstrap;
+        const {teams, players, events} = state.BootstrapReducer.bootstrap;
         const {picks, isFetching} = state.CompareTeamReducer;
         const teamId = ownProps.navigation.getParam('team');
         const team = teamId && picks[teamId] ? picks[teamId] : [];
@@ -28,6 +28,7 @@ class CompareTeamScreen extends Component {
             ...ownProps,
             teams: teams,
             players: players,
+            events: events,
             team: team.length === 15 ? FantasyTeam.fromJson(players)(team) : FantasyTeam.EmptyTeam,
             myTeam: myPicks.length === 15 ? FantasyTeam.fromJson(players)(myPicks) : FantasyTeam.EmptyTeam,
             isFetching: isFetching,
@@ -38,7 +39,7 @@ class CompareTeamScreen extends Component {
     getTeamId = () => this.props.navigation.getParam('team');
 
     refreshCompareTeam() {
-        this.props.dispatch(fetchTeam(this.getTeamId(), 4));
+        this.props.dispatch(fetchTeam(this.getTeamId(), this.props.events.find(event => event.isCurrent).id));
     }
 
     refreshMyTeam() {
