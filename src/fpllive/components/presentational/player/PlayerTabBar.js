@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {withTheme} from 'react-native-paper';
-import {MaterialTopTabBar} from 'react-navigation';
+import {MaterialTopTabBar} from 'react-navigation-tabs';
 
 const PlayerTabBar = props => (
     <MaterialTopTabBar

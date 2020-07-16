@@ -14,7 +14,7 @@ class CompareTeamScreen extends Component {
         const subtitle = navigation.getParam('subtitle');
         return ({
             title: 'Compare',
-            header: <CustomHeader title={team} navigation={navigation} subtitle={subtitle}/>,
+            header: () => <CustomHeader title={team} navigation={navigation} subtitle={subtitle}/>,
         });
     };
 

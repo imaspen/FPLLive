@@ -18,7 +18,7 @@ class AppContainer extends Component {
     AppNavigator = createMaterialBottomTabNavigator({
         League: LeagueStack,
         MyTeam: MyTeamStack,
-        Compare: CompareTeamStack,
+        Compare: CompareTeamStack
         /*Live:,
         Matches:,*/
     }, {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 import {View} from 'react-native';
-import {createMaterialTopTabNavigator} from 'react-navigation';
+import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 
 import CustomHeader from '../../CustomHeader';
 import PlayerPhoto from '../../presentational/player/PlayerPhoto';
@@ -24,7 +24,7 @@ class PlayerScreen extends Component {
     static navigationOptions = ({navigation}) => {
         const player = navigation.getParam('player');
         return {
-            header: <CustomHeader title={player.getFullName()} subtitle={player.team.name} navigation={navigation}
+            header: () => <CustomHeader title={player.getFullName()} subtitle={player.team.name} navigation={navigation}
                                   elevation={0}/>,
         };
     };

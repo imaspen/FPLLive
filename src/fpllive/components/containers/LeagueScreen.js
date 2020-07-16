@@ -11,7 +11,7 @@ class LeagueScreen extends Component {
     static navigationOptions = ({navigation}) => {
         return ({
             title: 'Home',
-            header: <CustomHeader title="Home" navigation={navigation} />,
+            header: () => <CustomHeader title="Home" navigation={navigation} />,
         });
     };
 

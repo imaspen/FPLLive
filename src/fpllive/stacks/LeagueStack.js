@@ -1,4 +1,4 @@
-import {createStackNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import LeagueScreen from '../components/containers/LeagueScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';

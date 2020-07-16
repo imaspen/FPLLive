@@ -12,7 +12,7 @@ class MyTeamScreen extends Component {
     static navigationOptions = ({navigation}) => {
         return ({
             title: 'My Team',
-            header: <CustomHeader title="My Team" navigation={navigation}/>,
+            header: () => <CustomHeader title="My Team" navigation={navigation}/>,
         });
     };
 
