@@ -9,8 +9,8 @@
     "react-devtools": "react-devtools"
   },
   "dependencies": {
-    "react": "16.8.6",
-    "react-native": "0.60.5",
+    "react": "16.13.1",
+    "react-native": "0.63.1",
     "react-native-device-info": "^3.0.0",
     "react-native-elements": "^1.1.0",
     "react-native-gesture-handler": "^1.4.1",
