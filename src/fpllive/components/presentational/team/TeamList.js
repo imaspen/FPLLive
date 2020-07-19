@@ -1,14 +1,16 @@
 import React from 'react';
 import {Image, SectionList, StyleSheet, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
-import {Divider, List, withTheme} from 'react-native-paper';
+import {Avatar, Divider, List, withTheme} from 'react-native-paper';
 import CaptainBadge from './CaptainBadge';
 import Theme from '../../../Theme';
-import ChipFilter from '../ChipFilter';
 
 export default props => {
-    const Chevron = withTheme(({theme}) => (
-        <View style={styles.centerVertical}><List.Icon icon="chevron-right" color={theme.colors.disabled} /></View>
+    const Chevron = withTheme(({points, theme}) => (
+        <View style={styles.centerVertical}>
+            <Avatar.Text size={24} label={points}/>
+            <List.Icon icon="chevron-right" color={theme.colors.disabled}/>
+        </View>
     ));
 
     const renderItem = ({item}) => (
@@ -28,7 +30,8 @@ export default props => {
                     }
                 </View>
             )}
-            right={() => <Chevron/>}
+            right={() => <Chevron points={props.points[item.id]}/>}
+            badge={{value: "2", textStyle: {color: 'orange'}, containerStyle: {marginTop: -20}}}
             title={item.shortName}
             titleStyle={props.compareTeam && props.compareTeam.getAllPlayers().includes(item) ? styles.bold : null}
             description={item.team.name}
@@ -71,8 +74,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     centerVertical: {
-        flexDirection: 'column',
-        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     shirt: {
         height: 40,

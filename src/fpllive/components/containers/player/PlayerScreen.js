@@ -34,9 +34,9 @@ class PlayerScreen extends Component {
         return {
             ...ownProps,
             teams: state.BootstrapReducer.bootstrap.teams,
-            fetching: state.PlayerReducer.isFetching,
+            fetching: state.PlayerReducer.players[player.id].isFetching,
             player: player,
-            playerDetails: state.PlayerReducer.players[player.id],
+            playerDetails: state.PlayerReducer.players[player.id].player,
         };
     }
 

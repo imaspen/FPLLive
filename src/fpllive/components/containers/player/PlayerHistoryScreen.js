@@ -8,7 +8,7 @@ class PlayerHistoryScreen extends Component {
         return {
             ...ownProps,
             player: player,
-            playerDetails: state.PlayerReducer.players[player.id],
+            playerDetails: state.PlayerReducer.players[player.id].player,
         };
     }
 

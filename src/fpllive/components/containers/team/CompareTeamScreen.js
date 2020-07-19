@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {connect} from 'react-redux';
 
 import CustomHeader from '../../CustomHeader';
@@ -20,10 +20,22 @@ class CompareTeamScreen extends Component {
 
     static mapStateToProps(state, ownProps) {
         const {teams, players, events} = state.BootstrapReducer.bootstrap;
-        const {picks, isFetching} = state.CompareTeamReducer;
+        let {picks, isFetching} = state.CompareTeamReducer;
+        const teamPlayers = state.PlayerReducer.players;
         const teamId = ownProps.navigation.getParam('team');
         const team = teamId && picks[teamId] ? picks[teamId] : [];
         const myPicks = state.MyTeamReducer.picks;
+        const playerPoints = {};
+        if (!isFetching) {
+            Object.keys(teamPlayers).forEach(key => {
+                const player = teamPlayers[key];
+                if (!player.isFetching) {
+                    playerPoints[key] = player.player.history[player.player.history.length - 1].points;
+                } else {
+                    isFetching = true;
+                }
+            });
+        }
         return {
             ...ownProps,
             teams: teams,
@@ -33,17 +45,18 @@ class CompareTeamScreen extends Component {
             myTeam: myPicks.length === 15 ? FantasyTeam.fromJson(players)(myPicks) : FantasyTeam.EmptyTeam,
             isFetching: isFetching,
             isFetchingMyTeam: state.MyTeamReducer.isFetching,
+            playerPoints: playerPoints,
         };
     }
 
     getTeamId = () => this.props.navigation.getParam('team');
 
     refreshCompareTeam() {
-        this.props.dispatch(fetchTeam(this.getTeamId(), this.props.events.find(event => event.isCurrent).id));
+        this.props.dispatch(fetchTeam(this.getTeamId(), this.props.teams, this.props.events.find(event => event.isCurrent).id));
     }
 
     refreshMyTeam() {
-        this.props.dispatch(fetchMyTeam('2211411'));
+        this.props.dispatch(fetchMyTeam('2211411', this.props.teams));
     }
 
     refresh() {
@@ -77,7 +90,9 @@ class CompareTeamScreen extends Component {
                     refresh={this.refresh.bind(this)}
                     team={this.props.team}
                     compareTeam={this.props.myTeam}
-                    selectPlayer={this.selectPlayer}/>
+                    selectPlayer={this.selectPlayer}
+                    points={this.props.playerPoints}
+                />
             </View>
         );
     }

@@ -9,15 +9,23 @@ export default (state = {
         case REQUEST_PLAYER:
             return {
                 ...state,
-                isFetching: true,
+                players: {
+                    ...state.players,
+                    [action.payload.player]: {
+                        isFetching: true,
+                        player: {}
+                    }
+                }
             };
         case RECEIVE_PLAYER:
             return {
                 ...state,
-                isFetching: false,
                 players: {
                     ...state.players,
-                    [action.payload.player]: PlayerDetails.fromJson(action.payload.teams)(action.payload.json),
+                    [action.payload.player]: {
+                        isFetching: false,
+                        player: PlayerDetails.fromJson(action.payload.teams)(action.payload.json)
+                    },
                 },
             };
         default:

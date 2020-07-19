@@ -1,10 +1,13 @@
 const ACTION_HEADER = 'PLAYER_';
 
 export const REQUEST_PLAYER = ACTION_HEADER + 'REQUEST_PLAYER';
-function requestPlayer() {
+function requestPlayer(playerId) {
     console.log('Requesting Player');
     return {
         type: REQUEST_PLAYER,
+        payload: {
+            player: playerId,
+        }
     };
 }
 
@@ -23,7 +26,7 @@ function receivePlayer(json, playerId, teams) {
 
 export function fetchPlayer(playerId, teams) {
     return function(dispatch) {
-        dispatch(requestPlayer());
+        dispatch(requestPlayer(playerId));
         return fetch(`https://fantasy.premierleague.com/api/element-summary/${playerId}/`, {
             headers: new Headers({'User-Agent': 'FPL Live App'}),
             credentials: 'include',

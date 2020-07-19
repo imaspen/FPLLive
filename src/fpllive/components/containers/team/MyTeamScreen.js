@@ -18,7 +18,19 @@ class MyTeamScreen extends Component {
 
     static mapStateToProps(state, ownProps) {
         const {teams, players, events} = state.BootstrapReducer.bootstrap;
-        const {picks, isFetching} = state.MyTeamReducer;
+        let {picks, isFetching} = state.MyTeamReducer;
+        const teamPlayers = state.PlayerReducer.players;
+        const playerPoints = {};
+        if (!isFetching) {
+            Object.keys(teamPlayers).forEach(key => {
+                const player = teamPlayers[key];
+                if (!player.isFetching) {
+                    playerPoints[key] = player.player.history[player.player.history.length - 1].points;
+                } else {
+                    isFetching = true;
+                }
+            });
+        }
         return {
             ...ownProps,
             teams: teams,
@@ -26,6 +38,7 @@ class MyTeamScreen extends Component {
             events: events.filter(event => event.finished).reverse(),
             team: picks.length === 15 ? FantasyTeam.fromJson(players)(picks) : FantasyTeam.EmptyTeam,
             isFetching: isFetching,
+            playerPoints: playerPoints,
         };
     }
 
@@ -34,7 +47,7 @@ class MyTeamScreen extends Component {
     };
 
     refresh() {
-        this.props.dispatch(fetchMyTeam('2211411'));
+        this.props.dispatch(fetchMyTeam('2211411', this.props.teams));
     }
 
     componentDidMount() {
@@ -52,7 +65,6 @@ class MyTeamScreen extends Component {
     };
 
     render() {
-        console.log(this.props.events);
         return (
             <View style={{flex: 1}}>
                 <ChipFilter
@@ -67,7 +79,9 @@ class MyTeamScreen extends Component {
                     refreshing={this.props.isFetching || this.props.team === FantasyTeam.EmptyTeam}
                     refresh={this.refresh.bind(this)}
                     team={this.props.team}
-                    selectPlayer={this.selectPlayer}/>
+                    selectPlayer={this.selectPlayer}
+                    points={this.props.playerPoints}
+                />
             </View>
         );
     }

@@ -11,8 +11,6 @@ const MyTextInput = props => (
 
 export default props => {
     DeviceInfo.getFontScale().then(fontScale => {
-        // styles.input.paddingBottom = 16 / fontScale;
-        console.log(16 / fontScale);
     });
 
     return (

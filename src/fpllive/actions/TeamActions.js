@@ -1,3 +1,5 @@
+import {fetchPlayer} from "./PlayerActions";
+
 const ACTION_HEADER = 'TEAM_';
 
 export const REQUEST = ACTION_HEADER + 'REQUEST';
@@ -20,7 +22,7 @@ function receiveTeam(json, teamId) {
     };
 }
 
-export function fetchTeam(teamId, week) {
+export function fetchTeam(teamId, teams, week) {
     return function(dispatch) {
         dispatch(requestTeam());
 
@@ -36,6 +38,7 @@ export function fetchTeam(teamId, week) {
             }
         ).then(
             json => {
+                json.picks.forEach(pick => dispatch(fetchPlayer(pick.element, teams)));
                 dispatch(receiveTeam(json, teamId));
             }
         );

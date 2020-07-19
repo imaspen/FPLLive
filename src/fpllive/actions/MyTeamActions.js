@@ -1,4 +1,4 @@
-import {authenticateActions} from './AuthenticateActions';
+import {fetchPlayer} from "./PlayerActions";
 
 const ACTION_HEADER = 'MY_TEAM_';
 
@@ -19,11 +19,11 @@ function receiveMyTeam(json) {
     };
 }
 
-export function fetchMyTeam(teamId) {
+export function fetchMyTeam(teamId, teams) {
     return function(dispatch) {
         dispatch(requestMyTeam());
 
-        const myTeam = fetch(`https://fantasy.premierleague.com/api/my-team/${teamId}/`, {
+        return fetch(`https://fantasy.premierleague.com/api/my-team/${teamId}/`, {
             headers: new Headers({'User-Agent': 'FPL Live App'}),
             credentials: 'include',
         }).then(
@@ -35,9 +35,9 @@ export function fetchMyTeam(teamId) {
             }
         ).then(
             json => {
+                json.picks.forEach(pick => dispatch(fetchPlayer(pick.element, teams)));
                 dispatch(receiveMyTeam(json));
             }
         );
-        return myTeam;
     };
 }

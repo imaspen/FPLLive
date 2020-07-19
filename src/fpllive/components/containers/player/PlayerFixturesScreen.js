@@ -7,7 +7,7 @@ class PlayerFixturesScreen extends Component {
         const playerId = ownProps.navigation.getParam('player').id;
         return {
             ...ownProps,
-            playerDetails: state.PlayerReducer.players[playerId],
+            playerDetails: state.PlayerReducer.players[playerId].player,
         };
     }
 
